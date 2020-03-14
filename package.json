@@ -1,0 +1,9 @@
+{
+  "name": "react-native-safety-button",
+  "version": "1.0.0",
+  "description": "Safety Buttons guard sensitive actions such as deletion. Safety Buttons activate after being pressed and held for a configurable duration.",
+  "main": "index.js",
+  "repository": "git@github.com:eh-dub/react-native-safety-button.git",
+  "author": "Ariel Weingarten",
+  "license": "MIT"
+}
