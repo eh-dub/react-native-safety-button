@@ -11,6 +11,11 @@ exports[`renders correctly 1`] = `
   onResponderTerminate={[Function]}
   onResponderTerminationRequest={[Function]}
   onStartShouldSetResponder={[Function]}
+  style={
+    Array [
+      undefined,
+    ]
+  }
 >
   <View
     style={
