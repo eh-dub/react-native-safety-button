@@ -12,7 +12,8 @@ export default function({
   style,
   activationThreshold = 1000,
   deactivationTime = 500,
-  onPressAndHold = () => {}
+  onPressAndHold = () => {},
+  progressColor = "white"
 }) {
   const [progress, updateProgress] = useState(0);
   const [fillAnimationValue] = useState(new Animated.Value(0)); //
@@ -47,12 +48,8 @@ export default function({
   }
 
   return (
-    <TouchableWithoutFeedback
-      onPressIn={startAction}
-      onPressOut={stopAction}
-      style={[style]}
-    >
-      <View>
+    <TouchableWithoutFeedback onPressIn={startAction} onPressOut={stopAction}>
+      <View style={[style]}>
         {children}
         <View
           style={{
@@ -62,7 +59,7 @@ export default function({
             bottom: 0,
             right: 0,
             width: `${progress}%`,
-            backgroundColor: "white"
+            backgroundColor: progressColor
           }}
         ></View>
       </View>
