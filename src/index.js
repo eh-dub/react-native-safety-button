@@ -7,25 +7,32 @@ import {
   Image
 } from "react-native";
 
-export default function({ onPressAndHold, children }) {
-  const label = "Clear Recipe";
-
-  const [buttonFill, updateButtonFill] = useState(0);
+export default function({
+  children,
+  style,
+  activationThreshold = 1000,
+  deactivationTime = 500,
+  onPressAndHold = () => {}
+}) {
+  const [progress, updateProgress] = useState(0);
   const [fillAnimationValue] = useState(new Animated.Value(0)); //
-  fillAnimationValue.addListener(({ value }) => updateButtonFill(value));
+  fillAnimationValue.addListener(({ value }) => updateProgress(value));
 
-  const [fillAnimation, updateFillAnimation] = useState(
-    Animated.timing(fillAnimationValue, { toValue: 100, duration: 1000 })
-  );
-  const [emptyAnimation, updateEmptyAnimation] = useState(
-    Animated.timing(fillAnimationValue, { toValue: 0, duration: 500 })
-  );
+  const fillAnimation = Animated.timing(fillAnimationValue, {
+    toValue: 100,
+    duration: activationThreshold
+  });
+
+  const emptyAnimation = Animated.timing(fillAnimationValue, {
+    toValue: 0,
+    duration: deactivationTime
+  });
 
   function startAction() {
     emptyAnimation.stop();
     fillAnimation.start(({ finished }) => {
       if (finished) {
-        buttonAction();
+        onPressAndHold();
         console.log("button action fired");
         fillAnimationValue.setValue(0);
       } else {
@@ -40,7 +47,11 @@ export default function({ onPressAndHold, children }) {
   }
 
   return (
-    <TouchableWithoutFeedback onPressIn={startAction} onPressOut={stopAction}>
+    <TouchableWithoutFeedback
+      onPressIn={startAction}
+      onPressOut={stopAction}
+      style={[style]}
+    >
       <View>
         {children}
         <View
@@ -50,7 +61,7 @@ export default function({ onPressAndHold, children }) {
             left: 0,
             bottom: 0,
             right: 0,
-            width: `${buttonFill}%`,
+            width: `${progress}%`,
             backgroundColor: "white"
           }}
         ></View>
