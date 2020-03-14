@@ -3,7 +3,21 @@
   "version": "1.0.0",
   "description": "Safety Buttons guard sensitive actions such as deletion. Safety Buttons activate after being pressed and held for a configurable duration.",
   "main": "index.js",
+  "scripts": {
+    "test": "jest --coverage"
+  },
   "repository": "git@github.com:eh-dub/react-native-safety-button.git",
   "author": "Ariel Weingarten",
-  "license": "MIT"
+  "license": "MIT",
+  "jest": {
+    "preset": "react-native",
+    "transform": {
+      "^.+\\.js$": "<rootDir>/node_modules/react-native/jest/preprocessor.js"
+    }
+  },
+  "dependencies": {
+    "react": "^16.13.0",
+    "react-native": "^0.61.5",
+    "react-test-renderer": "^16.13.0"
+  }
 }

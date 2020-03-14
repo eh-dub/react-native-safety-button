@@ -2,23 +2,12 @@ import React, { useState } from "react";
 import {
   Animated,
   TouchableWithoutFeedback,
-  StyleSheet,
   View,
   Text,
   Image
 } from "react-native";
 
-import styles from "./style";
-
-export default function({ buttonAction }) {
-  const imagePrefix = "../assets/images/";
-  const images = {
-    "Save Image": require(`${imagePrefix}icons8-download-300.png`),
-    "Add Ingredient": require(`${imagePrefix}icon-add-ingredient.png`),
-    "Clear Recipe": require(`${imagePrefix}icons8-recurring-appointment.png`),
-    "View Your Recipes": require(`${imagePrefix}icons8-thumbnails.png`)
-  };
-
+export default function({ onPressAndHold, children }) {
   const label = "Clear Recipe";
 
   const [buttonFill, updateButtonFill] = useState(0);
@@ -52,34 +41,8 @@ export default function({ buttonAction }) {
 
   return (
     <TouchableWithoutFeedback onPressIn={startAction} onPressOut={stopAction}>
-      <View style={[styles.iconButton]}>
-        <View
-          style={[
-            {
-              flexDirection: "row",
-              justifyContent: "space-evenly",
-              alignItems: "center",
-              padding: 5
-            }
-          ]}
-        >
-          {images[label] && (
-            <Image
-              style={[
-                {
-                  width: 25,
-                  height: 25,
-                  marginRight: 5,
-                  alignSelf: "flex-start"
-                }
-              ]}
-              source={images[label]}
-            ></Image>
-          )}
-          <Text style={[styles.iconText]} numberOfLines={2}>
-            {label}
-          </Text>
-        </View>
+      <View>
+        {children}
         <View
           style={{
             position: "absolute",
